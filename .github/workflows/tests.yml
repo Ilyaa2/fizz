@@ -65,7 +65,7 @@ jobs:
 
   pg-tests:
     name: PostgreSQL tests - Go v${{ matrix.go-version }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu:22.04
     strategy:
       matrix:
         go-version:
