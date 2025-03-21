@@ -98,7 +98,7 @@ jobs:
           SODA_DIALECT: "postgres"
           POSTGRESQL_URL: "postgres://postgres:postgres@${{job.services.postgres.host}}:${{ job.services.postgres.ports[5432] }}/pop_test?sslmode=disable"
         run: |
-          go install -tags sqlite github.com/gobuffalo/pop/v6/soda@latest
+          go install -tags sqlite github.com/gobuffalo/pop/v6/soda@v6.0.4
           soda drop -e $SODA_DIALECT -p ./testdata/migrations
           soda create -e $SODA_DIALECT -p ./testdata/migrations
           soda migrate -e $SODA_DIALECT -p ./testdata/migrations
