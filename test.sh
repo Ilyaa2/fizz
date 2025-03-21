@@ -43,7 +43,7 @@ function test {
 
 $COMPOSE up --wait
 
-go install -tags sqlite github.com/gobuffalo/pop/v6/soda@latest
+go install -tags sqlite github.com/gobuffalo/pop/v6/soda@v6.0.4
 
 test "sqlite"
 test "postgres"
