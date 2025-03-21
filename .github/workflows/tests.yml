@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - main
+      - ydb_translator
   pull_request:
 
 jobs:
