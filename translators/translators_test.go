@@ -31,6 +31,10 @@ type SQLiteSuite struct {
 	suite.Suite
 }
 
+type YdbSuite struct {
+	suite.Suite
+}
+
 type SchemaSuite struct {
 	suite.Suite
 }
@@ -49,6 +53,8 @@ func TestSpecificSuites(t *testing.T) {
 		suite.Run(t, &MsSqlServerSQLSuite{})
 	case "sqlite":
 		suite.Run(t, &SQLiteSuite{})
+	case "ydb":
+		suite.Run(t, &YdbSuite{})
 	}
 
 	suite.Run(t, &SchemaSuite{})

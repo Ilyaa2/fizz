@@ -1,6 +1,6 @@
 module e2e
 
-go 1.16
+go 1.20
 
 require (
 	github.com/gobuffalo/pop/v6 v6.0.4

@@ -8,7 +8,7 @@ services:
       - MYSQL_DATABASE=pop_test
       - MYSQL_USER=pop
       - MYSQL_PASSWORD=pop
-    #volumes:
+      #volumes:
       #- ./_vol/mysql:/docker-entrypoint-initdb.d
     ports:
       - "3307:3306"
@@ -26,7 +26,7 @@ services:
       - POSTGRES_PASSWORD=postgres
     ports:
       - "5433:5432"
-    #volumes:
+      #volumes:
       #- ./_vol/postgres:/docker-entrypoint-initdb.d
     healthcheck:
       test: ["CMD", "pg_isready"]
@@ -40,7 +40,7 @@ services:
     ports:
       - "26258:26257"
       - "8081:8080"
-    #volumes:
+      #volumes:
       #- ./_vol/cockroach:/cockroach/cockroach-data
     command: start-single-node --insecure
     healthcheck:
@@ -50,11 +50,24 @@ services:
       retries: 10
       start_period: 3s
 
-#  mssqlserver:
-#    image: "microsoft/mssql-server-linux"
-#    environment:
-#      - SA_PASSWORD=Tt@12345678
-#      - MSSQLSERVER_PASSWORD=Tt@12345678
-#      - ACCEPT_EULA=Y
-#    ports:
-#      - "1433:1433"
+  #  mssqlserver:
+  #    image: "microsoft/mssql-server-linux"
+  #    environment:
+  #      - SA_PASSWORD=Tt@12345678
+  #      - MSSQLSERVER_PASSWORD=Tt@12345678
+  #      - ACCEPT_EULA=Y
+  #    ports:
+  #      - "1433:1433"
+
+  ydb-local:
+    image: ydbplatform/local-ydb:latest
+    container_name: ydb-local
+    hostname: localhost
+    ports:
+      - "2136:2136"
+      - "8765:8765"
+    #    volumes:
+    #    - ./ydb_data:/ydb_data
+    environment:
+      - GRPC_PORT=2136
+      - MON_PORT=8765
