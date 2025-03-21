@@ -3,8 +3,9 @@ package translators
 import (
 	"errors"
 	"fmt"
-	"github.com/gobuffalo/fizz"
 	"strings"
+
+	"github.com/gobuffalo/fizz"
 )
 
 var ErrUnimplemented = errors.New("this type of operation doesn't implemented in db as a sql query")

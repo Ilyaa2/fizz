@@ -3,8 +3,8 @@ package translators_test
 import (
 	"fmt"
 	"github.com/gobuffalo/fizz"
+
 	"github.com/gobuffalo/fizz/translators"
-	//_ "github.com/ydb-platform/ydb-go-sdk/v3"
 )
 
 var _ fizz.Translator = (*translators.Ydb)(nil)
