@@ -273,6 +273,11 @@ func (y *YdbSuite) Test_YDB_ChangeColumn() {
 	translators.RandInt = func() int {
 		return 1
 	}
+	translators.TableInfo = func(s string) (*fizz.Table, error) {
+		return &fizz.Table{
+			Indexes: []fizz.Index{},
+		}, nil
+	}
 	ddl := "ALTER TABLE `users` ADD COLUMN `mycolumn1` String;\n" +
 		"UPDATE `users` SET `mycolumn1` = `mycolumn`;\n" +
 		"ALTER TABLE `users` DROP COLUMN `mycolumn`;\n" +

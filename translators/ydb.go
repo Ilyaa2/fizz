@@ -118,7 +118,7 @@ func (y *Ydb) ChangeColumn(t fizz.Table) (string, error) {
 	if len(t.Columns) == 0 {
 		return "", fmt.Errorf("not enough columns given")
 	}
-	actualizedTable, err := y.Schema.TableInfo(t.Name)
+	actualizedTable, err := TableInfo(t.Name)
 	if err != nil {
 		withIndices = false
 		log.Println("error from ydb Schema method TableInfo() while changing column: " + err.Error())
@@ -163,7 +163,6 @@ func (y *Ydb) ChangeColumn(t fizz.Table) (string, error) {
 
 	copyToNewColumnSql := fmt.Sprintf("UPDATE `%s` SET `%s` = `%s`;", t.Name, baseColumn.Name, tmpColumn.Name)
 	deleteTmpColumnSql := fmt.Sprintf("ALTER TABLE `%s` DROP COLUMN `%s`;", t.Name, tmpColumn.Name)
-	//todo а здесь нужно воссоздать все индексы, причем индексы могут быть двойными и больше (составными)
 
 	var finalSql []string
 	//ddl
@@ -210,8 +209,6 @@ func (y *Ydb) DropColumn(t fizz.Table) (string, error) {
 
 func (y *Ydb) RenameColumn(t fizz.Table) (string, error) {
 	/*
-		//todo проверить, если дропнуть колонку, в которой до этого были данные, не будет ли ошибки????
-
 		--меняем название first_name
 
 		--ddl
@@ -234,9 +231,6 @@ func (y *Ydb) RenameColumn(t fizz.Table) (string, error) {
 	*/
 
 	//в Ydb выдается ошибка при удалении колонки, если на ней были индексы.
-
-	//	oc := t.Columns[0]
-	//	nc := t.Columns[1]
 	if len(t.Columns) == 0 {
 		return "", fmt.Errorf("not enough columns given")
 	}
