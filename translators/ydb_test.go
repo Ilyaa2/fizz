@@ -268,12 +268,20 @@ func (y *YdbSuite) Test_YDB_RenameTable_NotEnoughValues() {
 	r.Error(err)
 }
 
-func (y *YdbSuite) Test_YDB_ChangeColumn_Unimplemented() {
+func (y *YdbSuite) Test_YDB_ChangeColumn() {
 	r := y.Require()
-
+	translators.RandInt = func() int {
+		return 1
+	}
+	ddl := "ALTER TABLE `users` ADD COLUMN `mycolumn1` String;\n" +
+		"UPDATE `users` SET `mycolumn1` = `mycolumn`;\n" +
+		"ALTER TABLE `users` DROP COLUMN `mycolumn`;\n" +
+		"ALTER TABLE `users` ADD COLUMN `mycolumn` String;\n" +
+		"UPDATE `users` SET `mycolumn` = `mycolumn1`;\n" +
+		"ALTER TABLE `users` DROP COLUMN `mycolumn1`;"
 	res, err := fizz.AString(`change_column("users", "mycolumn", "[]byte", {"default": "foo", "size": 50})`, ydbt)
-	r.ErrorIs(err, translators.ErrUnimplemented)
-	r.Empty(res)
+	r.NoError(err)
+	r.Equal(ddl, res)
 }
 
 func (y *YdbSuite) Test_YDB_AddColumn_WithNoDefault() {
@@ -294,12 +302,26 @@ func (y *YdbSuite) Test_YDB_DropColumn() {
 	r.Equal(ddl, res)
 }
 
-func (y *YdbSuite) Test_YDB_RenameColumn_Unimplemented() {
+func (y *YdbSuite) Test_YDB_RenameColumn() {
 	r := y.Require()
-	res, err := fizz.AString(`rename_column("table_name", "old_column", "new_column")`, ydbt)
+	translators.TableInfo = func(s string) (*fizz.Table, error) {
+		return &fizz.Table{
+			Name: "users",
+			Columns: []fizz.Column{
+				{
+					Name:    "mycolumn",
+					ColType: "String",
+				},
+			},
+		}, nil
+	}
 
-	r.ErrorIs(err, translators.ErrUnimplemented)
-	r.Empty(res)
+	ddl := "ALTER TABLE `users` ADD COLUMN `new_column` String;\n" +
+		"UPDATE `users` SET `new_column` = `mycolumn`;\n" +
+		"ALTER TABLE `users` DROP COLUMN `mycolumn`;"
+	res, err := fizz.AString(`rename_column("users", "mycolumn", "new_column")`, ydbt)
+	r.NoError(err)
+	r.Equal(ddl, res)
 }
 
 func (y *YdbSuite) Test_YDB_AddIndex() {

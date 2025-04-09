@@ -84,7 +84,7 @@ func (s *Schema) ColumnInfo(table string, column string) (*fizz.Column, error) {
 		return nil, err
 	}
 
-	if ci, ok := s.findColumnInfo(ti, column); ok {
+	if ci, ok := FindColumnInfo(ti, column); ok {
 		return ci, nil
 	}
 	return nil, fmt.Errorf("could not find column data for %s in table %s", column, table)
@@ -123,7 +123,7 @@ func (s *Schema) DeleteColumn(table string, column string) {
 	}
 }
 
-func (s *Schema) findColumnInfo(tableInfo *fizz.Table, column string) (*fizz.Column, bool) {
+func FindColumnInfo(tableInfo *fizz.Table, column string) (*fizz.Column, bool) {
 	for _, col := range tableInfo.Columns {
 		if strings.ToLower(strings.TrimSpace(col.Name)) == strings.ToLower(strings.TrimSpace(column)) {
 			return &col, true
