@@ -3,6 +3,7 @@ package translators
 import (
 	"errors"
 	"fmt"
+	"strconv"
 	"strings"
 
 	"github.com/gobuffalo/fizz"
@@ -163,10 +164,11 @@ func (y *Ydb) buildAddColumn(c fizz.Column, isAddColumn bool) string {
 	if !isAddColumn && c.Options["default"] != nil {
 		_, ok := c.Options["default"].(string)
 		if ok {
-			s = fmt.Sprintf("%s DEFAULT '%v'", s, c.Options["default"])
-		} else {
-			s = fmt.Sprintf("%s DEFAULT %v", s, c.Options["default"])
+			if _, err := strconv.ParseFloat(c.Options["default"].(string), 64); err != nil {
+				return fmt.Sprintf("%s DEFAULT '%v'", s, c.Options["default"])
+			}
 		}
+		s = fmt.Sprintf("%s DEFAULT %v", s, c.Options["default"])
 	}
 
 	return s
@@ -178,7 +180,7 @@ func (y *Ydb) colType(c fizz.Column) string {
 		return "Utf8"
 	case "uuid":
 		return "Uuid"
-	case "bool":
+	case "bool", "boolean":
 		return "Bool"
 	case "time", "timestamp":
 		return "Timestamp"
@@ -188,7 +190,7 @@ func (y *Ydb) colType(c fizz.Column) string {
 		return "String"
 	case "float":
 		return "Float"
-	case "double":
+	case "double", "numeric":
 		return "Double"
 	case "decimal":
 		if c.Options["precision"] != nil && c.Options["scale"] != nil {
