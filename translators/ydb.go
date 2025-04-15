@@ -47,7 +47,7 @@ func (y *Ydb) CreateTable(t fizz.Table) (string, error) {
 			case "string":
 				c.ColType = "Utf8"
 			case "uuid":
-				c.ColType = "Uuid"
+				c.ColType = "Utf8"
 			case "integer", "INT", "int":
 				c.ColType = "Serial"
 			case "bigint", "BIGINT":
@@ -185,9 +185,6 @@ func (y *Ydb) ChangeColumn(t fizz.Table) (string, error) {
 
 	//dml
 	finalSql = append(finalSql, deleteTmpColumnSql)
-
-	//todo обернуть в одну транзакцию
-
 	return strings.Join(finalSql, "\n"), nil
 }
 
@@ -294,8 +291,6 @@ func (y *Ydb) RenameColumn(t fizz.Table) (string, error) {
 	//ddl
 	finalSql = append(finalSql, deleteOldColumnSql)
 	//--
-	//todo обернуть в одну транзакцию
-
 	return strings.Join(finalSql, "\n"), nil
 }
 
@@ -359,10 +354,8 @@ func (y *Ydb) buildAddColumn(c fizz.Column, isAddColumn bool) string {
 
 func (y *Ydb) colType(c fizz.Column) string {
 	switch c.ColType {
-	case "string", "text":
+	case "Uuid", "uuid", "string", "text":
 		return "Utf8"
-	case "uuid":
-		return "Uuid"
 	case "bool", "boolean":
 		return "Bool"
 	case "time", "timestamp":
