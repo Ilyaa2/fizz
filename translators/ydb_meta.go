@@ -10,7 +10,7 @@ import (
 	"github.com/ydb-platform/ydb-go-sdk/v3"
 	"github.com/ydb-platform/ydb-go-sdk/v3/table"
 
-	"github.com/gobuffalo/fizz"
+	"github.com/ydb-platform/fizz"
 )
 
 type ydbSchema struct {

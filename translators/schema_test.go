@@ -1,8 +1,8 @@
 package translators_test
 
 import (
-	"github.com/gobuffalo/fizz"
-	"github.com/gobuffalo/fizz/translators"
+	"github.com/ydb-platform/fizz"
+	"github.com/ydb-platform/fizz/translators"
 )
 
 func (s *SchemaSuite) buildSchema() translators.Schema {

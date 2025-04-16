@@ -6,7 +6,7 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/gobuffalo/fizz"
+	"github.com/ydb-platform/fizz"
 )
 
 type sqliteIndexListInfo struct {

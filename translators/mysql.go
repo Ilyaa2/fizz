@@ -5,7 +5,7 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/gobuffalo/fizz"
+	"github.com/ydb-platform/fizz"
 )
 
 // MySQL is a MySQL-specific translator.

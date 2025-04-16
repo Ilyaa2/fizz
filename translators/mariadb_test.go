@@ -3,8 +3,8 @@ package translators_test
 import (
 	"fmt"
 
-	"github.com/gobuffalo/fizz"
-	"github.com/gobuffalo/fizz/translators"
+	"github.com/ydb-platform/fizz"
+	"github.com/ydb-platform/fizz/translators"
 )
 
 var _ fizz.Translator = (*translators.MariaDB)(nil)

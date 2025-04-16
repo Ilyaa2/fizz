@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/gobuffalo/fizz"
+	"github.com/ydb-platform/fizz"
 )
 
 type SchemaQuery interface {

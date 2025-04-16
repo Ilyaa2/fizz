@@ -1,4 +1,4 @@
-module github.com/gobuffalo/fizz
+module github.com/ydb-platform/fizz
 
 go 1.21
 
