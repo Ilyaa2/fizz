@@ -3,8 +3,8 @@ package fizz_test
 import (
 	"testing"
 
+	"github.com/gobuffalo/fizz"
 	"github.com/stretchr/testify/require"
-	"github.com/ydb-platform/fizz"
 )
 
 func Test_Column_Stringer(t *testing.T) {

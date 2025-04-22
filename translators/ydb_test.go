@@ -2,9 +2,9 @@ package translators_test
 
 import (
 	"fmt"
-	"github.com/ydb-platform/fizz"
 
-	"github.com/ydb-platform/fizz/translators"
+	"github.com/gobuffalo/fizz"
+	"github.com/gobuffalo/fizz/translators"
 )
 
 var _ fizz.Translator = (*translators.Ydb)(nil)
@@ -30,7 +30,7 @@ func (y *YdbSuite) Test_YDB_CreateTable() {
 		`permissions` Json,
 		`age` Int64 DEFAULT 40,
 		`raw` String NOT NULL,
-		`company_id` Uuid NOT NULL,
+		`company_id` Utf8 NOT NULL,
 		`created_at` Timestamp NOT NULL,
 		`updated_at` Timestamp NOT NULL
 		);
@@ -44,7 +44,7 @@ func (y *YdbSuite) Test_YDB_CreateTable() {
 		"\n`permissions` Json," +
 		"\n`age` Int64 DEFAULT 40," +
 		"\n`raw` String NOT NULL," +
-		"\n`company_id` Uuid NOT NULL," +
+		"\n`company_id` Utf8 NOT NULL," +
 		"\n`created_at` Timestamp NOT NULL," +
 		"\n`updated_at` Timestamp NOT NULL\n);"
 
@@ -78,7 +78,7 @@ func (y *YdbSuite) Test_YDB_CreateTable_UUID() {
 		`jason` Json NOT NULL,
 		`mydecimal` Double NOT NULL,
 		`mydecimal2` Decimal(22,9) NOT NULL,
-		`uuid` Uuid NOT NULL,
+		`uuid` Utf8 NOT NULL,
 		PRIMARY KEY(`uuid`),
 		`created_at` Timestamp NOT NULL,
 		`updated_at` Timestamp NOT NULL
@@ -96,7 +96,7 @@ func (y *YdbSuite) Test_YDB_CreateTable_UUID() {
 		"\n`jason` Json NOT NULL," +
 		"\n`mydecimal` Double NOT NULL," +
 		"\n`mydecimal2` Decimal(22,9) NOT NULL," +
-		"\n`uuid` Uuid NOT NULL," +
+		"\n`uuid` Utf8 NOT NULL," +
 		"\nPRIMARY KEY(`uuid`)," +
 		"\n`created_at` Timestamp NOT NULL," +
 		"\n`updated_at` Timestamp NOT NULL\n);"

@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/ydb-platform/fizz"
+	"github.com/gobuffalo/fizz"
 )
 
 type SQLite struct {

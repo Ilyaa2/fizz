@@ -8,7 +8,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/ydb-platform/fizz"
+	"github.com/gobuffalo/fizz"
 )
 
 var ErrUnimplemented = errors.New("this type of operation doesn't implemented in db as a sql query")

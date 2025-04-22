@@ -4,8 +4,8 @@ import (
 	"fmt"
 
 	_ "github.com/go-sql-driver/mysql" // Load MySQL Go driver
-	"github.com/ydb-platform/fizz"
-	"github.com/ydb-platform/fizz/translators"
+	"github.com/gobuffalo/fizz"
+	"github.com/gobuffalo/fizz/translators"
 )
 
 var _ fizz.Translator = (*translators.MySQL)(nil)

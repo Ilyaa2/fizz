@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 
-	"github.com/ydb-platform/fizz"
+	"github.com/gobuffalo/fizz"
 )
 
 type cockroachForeignKeyListInfo struct {

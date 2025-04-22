@@ -33,3 +33,4 @@ migrations/schema.sql
 vendor/
 sqldumps/
 sql/
+main/main.go

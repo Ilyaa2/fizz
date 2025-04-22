@@ -6,7 +6,7 @@ import (
 	"strings"
 
 	"github.com/Masterminds/semver/v3"
-	"github.com/ydb-platform/fizz"
+	"github.com/gobuffalo/fizz"
 )
 
 var mysql57Version = semver.MustParse("5.7.0")
